@@ -1,0 +1,91 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Maidenhead Grid Square Contest Map Generator</title>
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <header>
+            <h1>Maidenhead Grid Square Contest Map Generator</h1>
+            <p>Generate color-coded maps of Maidenhead grid squares from amateur radio contest logs</p>
+        </header>
+
+        <div class="form-container">
+            <form id="mapGeneratorForm">
+                <div class="form-section">
+                    <h2>Step 1 - Submit Contest Log</h2>
+                    <p>Upload your Cabrillo-formatted log or CSV file for map generation. The form will process your log and create maps showing geographic coverage and contact density by frequency band.</p>
+                </div>
+
+                <div class="form-group">
+                    <label for="callsign">Station Callsign <span class="required">*</span></label>
+                    <input type="text" id="callsign" name="callsign" required placeholder="e.g., K2UA">
+                </div>
+
+                <div class="form-group">
+                    <label for="continents">Select Continents to Display:</label>
+                    <div class="checkbox-group">
+                        <label><input type="checkbox" name="continents" value="north_america"> North America</label>
+                        <label><input type="checkbox" name="continents" value="south_america"> South America</label>
+                        <label><input type="checkbox" name="continents" value="europe"> Europe</label>
+                        <label><input type="checkbox" name="continents" value="africa"> Africa</label>
+                        <label><input type="checkbox" name="continents" value="asia"> Asia</label>
+                        <label><input type="checkbox" name="continents" value="oceania"> Oceania</label>
+                    </div>
+                    <small>Leave blank for automatic continent detection based on grid squares in your log</small>
+                </div>
+
+                <div class="form-group">
+                    <label>Select Log File on Your Computer:</label>
+                    <input type="file" id="logFile" accept=".cbr,.log,.csv" class="file-input">
+                    <div class="file-info">
+                        <small>Supported formats: Cabrillo (.cbr, .log) and CSV (.csv) files</small>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label>OR paste your Cabrillo-formatted log into the text area below:</label>
+                    <textarea id="logContent" rows="10" placeholder="Paste your contest log content here..."></textarea>
+                </div>
+
+                <div class="form-actions">
+                    <button type="submit" id="generateBtn" class="btn-primary">Generate Maps</button>
+                    <button type="reset" class="btn-secondary">Reset Form</button>
+                </div>
+            </form>
+
+            <div id="loadingIndicator" class="loading hidden">
+                <div class="spinner"></div>
+                <p>Generating your maps... This may take a few minutes.</p>
+            </div>
+
+            <div id="results" class="results hidden">
+                <h2>Generated Maps</h2>
+                <div id="mapsList"></div>
+            </div>
+
+            <div id="errorMessage" class="error hidden"></div>
+        </div>
+
+        <footer>
+            <div class="features">
+                <h3>Features</h3>
+                <ul>
+                    <li>Multi-format support: Cabrillo (.cbr/.log) and CSV (.csv) files</li>
+                    <li>Multi-band analysis: Separate maps for each frequency band</li>
+                    <li>Contact density visualization: Color-coded intensity</li>
+                    <li>Grid square boundaries: 1°×2° outlines for VHF/UHF/microwave bands</li>
+                    <li>4-digit grid labels: Reference labels at grid corners</li>
+                    <li>Automatic regional zoom: Optimized map bounds</li>
+                    <li>Geographic context: Coastlines, borders, and Great Lakes</li>
+                </ul>
+            </div>
+        </footer>
+    </div>
+
+    <script src="script.js"></script>
+</body>
+</html>
